@@ -30,7 +30,7 @@ class Subject{
 }
 
 
-class Item extends Subject{
+class Item {
     constructor(name, quantity, priority, store, section, price) {
         super()
         this.name = name;
@@ -39,62 +39,72 @@ class Item extends Subject{
         this.section = section;
         this.price = price;
 
-        this.purchased = false;
+        this._purchased = false;
     }
+    get purchased(){
+        return this._purchased;
+    }
+    set purchased(nv){
+        this._purchased = nv;
+        alert(`${this.name} was purchased`)
+    }
+}
 
-    get name(){
-        return this.name
-    }
-    set name(newName){
-        this.name = newName
-        this.publish("changeName", this)
-    }
-    get priority(){
-        return this.priority
-    }
-    set priority(newPriority){
-        this.priority = newPriority
-        this.publish("changePriority", this)
-    }
-    get store(){
-        return this.store
-    }
-    set store(newStore){
-        this.store = newStore
-        this.publish("changeStore", this)
-    }
-    get section(){
-        return this.section
-    }
-    set section(newSection){
-        this.section = newSection
-        this.publish("changeSection", this)
-    }
-    get price(){
-        return this.price
-    }
-    set price(newPrice){
-        this.price = newPrice
-        this.publish("changePrice", this)
-    }
+    // get name(){
+    //     return this.name
+    // }
+    // set name(newName){
+    //     this.name = newName
+    //     this.publish("changeName", this)
+    // }
+    // get priority(){
+    //     return this.priority
+    // }
+    // set priority(newPriority){
+    //     this.priority = newPriority
+    //     this.publish("changePriority", this)
+    // }
+    // get store(){
+    //     return this.store
+    // }
+    // set store(newStore){
+    //     this.store = newStore
+    //     this.publish("changeStore", this)
+    // }
+    // get section(){
+    //     return this.section
+    // }
+    // set section(newSection){
+    //     this.section = newSection
+    //     this.publish("changeSection", this)
+    // }
+    // get price(){
+    //     return this.price
+    // }
+    // set price(newPrice){
+    //     this.price = newPrice
+    //     this.publish("changePrice", this)
+    // }
 
 }
 
 class ShoppingList extends Subject{
     constructor() {
         super()
-        this.Items = []
-    }
-
-    get ShoppingList(){
-        return this.Items
-    }
-
-    get length(){
-        return this.Items.length
-    }
+        this.newItems = []
+        this.oldItems = []
+}
+    
     addItem(it) {
-        this.Items.push(it)
-        this.publish('Add Item', this)
+        this.newItems.push(it)
+        this.publish('Add New Item', this)
     }
+
+    // get ShoppingList(){
+    //     return this.newItems
+    // }
+
+    // get length(){
+    //     return this.newItems.length
+    // }
 }
