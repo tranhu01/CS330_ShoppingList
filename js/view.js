@@ -1,8 +1,12 @@
-import model.js
 
 class ShoppingView {
     constructor(model) {
-        model.subscribe(this.redrawList.bind(this))
+    	// the bind() method creates a new function
+    	let self = this;
+
+        model.subscribe( function(a,b){
+        	self.redrawList(a,b)
+        })
     }
 
     redrawList(shoppingList, msg) {
