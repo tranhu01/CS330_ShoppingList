@@ -9,3 +9,7 @@
 .low {
     background-color: #ded
 }
+
+.purchased {
+    text-decoration: line-through;
+}

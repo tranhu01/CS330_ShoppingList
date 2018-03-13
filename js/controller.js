@@ -3,6 +3,7 @@ var sections = ['Produce', 'Meats', 'Cereal', 'Canned Goods', 'Frozen Foods', 'D
 
 var shoppingModel = new ShoppingList()
 var myView = new ShoppingView(shoppingModel)
+var storageManager= new StorageManager(shoppingModel,"shoppingList")
 
 function clickedon() {
     let rowcolids = ['itemname', 'qty', 'store', 'category', 'price', 'priority']
@@ -25,8 +26,19 @@ function populateSelect(selectId, sList) {
     }
 }
 
+function saveShoppingList(){
+    storageManager.save(shoppingModel)
+}
+
+function loadShoppingList(){
+    storageManager.load()
+}
+
 $(document).ready(function () {
     populateSelect('store', stores)
     populateSelect('category', sections)
 })
 
+$(document).on('click','th',function(){
+    shoppingModel.sortBy($(this).text())
+})
