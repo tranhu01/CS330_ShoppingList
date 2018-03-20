@@ -48,7 +48,7 @@
             for (let i = 1; i < 5; i++) {
                 let num = document.getElementById("num" + i).value
                 if (num != '') {
-                    numbers.append(num)
+                    numbers.push(num)
                 }
             }
             let fetch_string = "http://localhost:5001/adder?"
@@ -61,9 +61,8 @@
             fetch(fetch_string, {mode: "cors"})
                 .then(function(response) {return response.json()})
                 .catch(error => console.error("error: ", error))
-                .then(function(json) {document.getElementById("result").innerHTML = json.answer})
+                .then(function(json) {document.getElementById("result").innerHTML = json.total})
         }
-
     </script>
 </body>
 </html>

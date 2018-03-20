@@ -10,12 +10,12 @@ def adder():
     numbers = []
     for i in range(1,5):
         num = request.args.get("num"+str(i))
-        if num != "":
+        if num != None:
             numbers.append(int(num))
 
     total = sum(numbers)
 
-    res = Response(json.dumps({'Total': total}))
+    res = Response(json.dumps({'total': total}))
     res.headers['Content-type'] = 'application/json'
     return res
 
