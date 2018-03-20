@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <title>Numbers Adding</title>
+</head>
+<body>
+    <div class='container'>
+        <div class="page-header">
+			    <h1>Numbers Add</h1>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                    <div class="row form-group">
+                        <div class='col-md-3'>
+                            <label for="num1" class="sr-only"></label>
+                            <input type=text class='form-control' name="num1" id='num1' placeholder="Enter Number 1"/>
+                        </div>
+                        <div class='col-md-3'>
+                            <label for="num2" class="sr-only"></label>
+                            <input type=text class='form-control' name="num2" id='num2' placeholder="Enter Number 2"/>
+                        </div>
+                        <div class='col-md-3'>
+                            <label for="num3" class="sr-only"></label>
+                            <input type=text class='form-control' name="num3" id='num3' placeholder="Enter Number 3"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="num4" class="sr-only"></label>
+                            <input type=text class='form-control' name="num4" id='num4' placeholder="Enter Number 4"/>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <button onclick='getSum()' class="btn btn-primary pull-right" id=gobutt>
+            Add Numbers
+        </button>
+        <div class="container">
+            <h1 class="display-2">The total is:</h1>
+            <h1 class="display-3" id="result"></h1>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function getSum(){
+            let numbers = []
+            for (let i = 1; i < 5; i++) {
+                let num = document.getElementById("num" + i).value
+                if (num != '') {
+                    numbers.append(num)
+                }
+            }
+            let fetch_string = "http://localhost:5001/adder?"
+            let index = 1
+            for (num of numbers) {
+                fetch_string = fetch_string + "num" + index.toString() + "=" + num + "&"
+                index += 1
+            }
+            fetch_string = fetch_string.slice(0, -1)
+            fetch(fetch_string, {mode: "cors"})
+                .then(function(response) {return response.json()})
+                .catch(error => console.error("error: ", error))
+                .then(function(json) {document.getElementById("result").innerHTML = json.answer})
+        }
+
+    </script>
+</body>
+</html>

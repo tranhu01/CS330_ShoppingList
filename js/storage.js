@@ -8,7 +8,7 @@ class StorageManager{
 
         model.subscribe(function(slist,msg){
             self.autoSave(slist)
-            console.log("saved manually: "+self.lsname+"automatic")
+            //console.log("saved manually: "+self.lsname+"automatic")
         })
 
         let localStorageFetch=localStorage.getItem(self.lsname+"automatic")
@@ -18,7 +18,7 @@ class StorageManager{
                 let item = new Item(val.name, val.quantity, val.priority, val.store,
                     val.section, val.price)
                 model.addItem(item)
-                console.log('restored automatically')
+                //console.log('restored automatically')
             }
         }
     }
@@ -31,7 +31,7 @@ class StorageManager{
     save(shoppingList){
         let localStorageList= JSON.stringify(shoppingList.newItems)
         localStorage.setItem(this.lsname, localStorageList)
-        console.log("saved manually, variable name: "+this.lsname)
+        //console.log("saved manually, variable name: "+this.lsname)
     }
 
     load(){
@@ -42,7 +42,7 @@ class StorageManager{
                 let item = new Item(val.name, val.quantity, val.priority, val.store,
                     val.section, val.price)
                 this.model.addItem(item)
-                console.log('restored manually')
+                //console.log('restored manually')
             }
         }
     }
