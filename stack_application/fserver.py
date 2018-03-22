@@ -15,11 +15,11 @@ def adder():
 
     total = sum(numbers)
 
-    res = Response(json.dumps({'total': total}))
-    res.headers['Content-type'] = 'application/json'
-    return res
+    # res = Response(json.dumps({'total': total}))
+    # res.headers['Content-type'] = 'application/json'
+    # return res
 
-    # return jsonify({'Total':total})
+    return jsonify({'total':total})
 
     # res = Response(json.dumps(num1 + num2))
     # res.headers['Content-type'] = 'application/json'
