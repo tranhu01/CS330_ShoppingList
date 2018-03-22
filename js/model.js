@@ -59,6 +59,8 @@ class ShoppingList extends Subject{
     constructor() {
         super()
         this.newItems = [];
+        this.lastSortedBy = null;
+        this.descending = true;
     }
     
     addItem(it) {
