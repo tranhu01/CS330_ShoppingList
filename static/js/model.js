@@ -59,6 +59,8 @@ class ShoppingList extends Subject{
     constructor() {
         super()
         this.newItems = [];
+        this.lastSortedBy = null;
+        this.descending = true;
     }
     
     addItem(it) {
@@ -82,19 +84,23 @@ class ShoppingList extends Subject{
         }
         this.publish('Remove Items', this)
     }
-
-    save() {
-        for (var property in this) {
-            localStorage.setItem("shoppingList " + property, JSON.stringify(this[property]))
-        }
+    removeAll(){
+            this.newItems=[]
+            this.publish(this,'removed all items')
     }
 
-    load() {
-        for (var property in this) {
-            this[property] = JSON.parse(localStorage.getItem("shoppingList " + property))
-        }
-        this.publish(this, "loading")
-    }
+    // save() {
+    //     for (var property in this) {
+    //         localStorage.setItem("shoppingList " + property, JSON.stringify(this[property]))
+    //     }
+    // }
+    //
+    // load() {
+    //     for (var property in this) {
+    //         this[property] = JSON.parse(localStorage.getItem("shoppingList " + property))
+    //     }
+    //     this.publish(this, "loading")
+    // }
 
     sortBy(columnName) {
 
