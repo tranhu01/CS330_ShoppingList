@@ -3,7 +3,7 @@
 # 1. Get local storage - new structure
 # 2. write the endpoints to save + get
 # 3. update js to use fetch to save & get
-# localhost:5001/static/index.html
+# localhost:5001/static/shopping.html
 
 from flask import Flask, Response, request, jsonify, send_from_directory
 from pathlib import Path
@@ -21,7 +21,7 @@ def send_css(path):
 
 @app.route('/')
 def page():
-    return send_from_directory('',"index.html")
+    return send_from_directory('',"shopping.html")
 
 @app.route('/shoppinglist', methods = ['GET','POST'])
 def shoppinglist():
