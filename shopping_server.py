@@ -26,7 +26,7 @@ def page():
 @app.route('/shoppinglist', methods = ['GET','POST'])
 def shoppinglist():
     wd = os.path.dirname(os.path.realpath(__file__))
-    file_path = wd + "/shoppingList.json"
+    file_path = wd + "/shoppingList.txt"
     my_file = Path(file_path)
 
     if request.method == 'GET':
@@ -48,7 +48,7 @@ def shoppinglist():
 @app.route('/shoppinglistauto', methods=['GET', 'POST'])
 def auto():
     wd = os.path.dirname(os.path.realpath(__file__))
-    file_path = wd + "/shoppingListAuto.json"
+    file_path = wd + "/shoppingListAuto.txt"
     my_file = Path(file_path)
 
     if request.method == 'GET':
