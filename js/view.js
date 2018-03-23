@@ -11,9 +11,12 @@ class ShoppingView {
     redrawList(shoppingList, msg) {
         let tbl = document.getElementById("shoppinglist")
         tbl.innerHTML = ""
-        for (let item of shoppingList.newItems) {
+        if (Array.isArray(shoppingList.newItems)){
+            for (let item of shoppingList.newItems) {
             this.addRow(item, tbl)
+            }
         }
+
     }
 
     addRow(item, parent) {

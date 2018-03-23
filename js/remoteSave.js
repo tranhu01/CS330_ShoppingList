@@ -26,13 +26,13 @@ class FlaskStorageManager{
 
     loadFlask(auto=false){
         let model=this.model
-        this.model.removeAll()
+        this.model.newItems = []
 
         let config={}
         config.method='GET'
         config.header={'Content-Type':'application/json','Accept':'application/json'}
 
-        get_string="/shoppinglist"
+        let get_string="/shoppinglist"
         if (auto==true){
             get_string= get_string+"auto"
         }
