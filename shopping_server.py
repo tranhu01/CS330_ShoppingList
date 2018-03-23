@@ -34,14 +34,16 @@ def shoppinglist():
         # read json from text file
         with open(file_path, 'rb') as info:
             raw = info.read()
-        return jsonify(raw)
+            res = Response(raw)
+            res.headers['Content-type'] = 'application/json'
+        return res
     else:
         # POST method
         # write json to text file
         with open(file_path, 'wb') as info:
-            raw = request.data
-            info.write(raw)
-        return raw
+            res = request.data
+            info.write(res)
+        return res
 
 @app.route('/shoppinglistauto', methods=['GET', 'POST'])
 def auto():
@@ -50,16 +52,17 @@ def auto():
     my_file = Path(file_path)
 
     if request.method == 'GET':
-        with open(file_path, "rb") as info:
-            # raw=json.load(datafile)
-            raw = info.read()
-        return jsonify(raw)
+        if os.path.exists(file_path):
+            with open(file_path, "rb") as info:
+                raw = info.read()
+                res = Response(raw)
+                res.headers['Content-type'] = 'application/json'
+            return res
     else:
         with open(file_path, "wb") as info:
-            # json.dump(raw, datafile)
-            raw = request.data
-            info.write(raw)
-        return raw
+            res = request.data
+            info.write(res)
+        return res
 
 
 if __name__ == "__main__":

@@ -4,13 +4,13 @@ class FlaskStorageManager{
         this.model = model
         let self = this
         model.subscribe(function(slist, msg) {
-            self.saveFlask(slist, auto=true)
+            self.saveFlask(slist, true)
         })
-        this.loadFlask(auto=true)
+        this.loadFlask(true)
     }
 
     saveFlask(slist, auto=false) {
-        let ls_list = JSON.stringify({newItems:slist.newItems})
+        let ls_list = JSON.stringify(slist.newItems)
         let post_string="/shoppinglist"
         if (auto==true){
             post_string=post_string+"auto"
@@ -34,7 +34,7 @@ class FlaskStorageManager{
 
         get_string="/shoppinglist"
         if (auto==true){
-            get_string=post_string+"auto"
+            get_string= get_string+"auto"
         }
         let fromFlask=fetch(get_string, config)
             .then(function (response) { return response.json() })
