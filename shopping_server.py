@@ -12,11 +12,11 @@ import os
 app = Flask(__name__, static_url_path = '')
 
 @app.route('/js/<path:path>')
-def send_js(path):
+def js(path):
     return send_from_directory('js', path)
 
 @app.route('/css/<path:path>')
-def send_css(path):
+def css(path):
     return send_from_directory('css', path)
 
 @app.route('/')
@@ -39,6 +39,24 @@ def shoppinglist():
         # POST method
         # write json to text file
         with open(file_path, 'wb') as info:
+            raw = request.data
+            info.write(raw)
+        return raw
+
+@app.route('/shoppinglistauto', methods=['GET', 'POST'])
+def auto():
+    wd = os.path.dirname(os.path.realpath(__file__))
+    file_path = wd + "/shoppingListAuto.json"
+    my_file = Path(file_path)
+
+    if request.method == 'GET':
+        with open(file_path, "rb") as info:
+            # raw=json.load(datafile)
+            raw = info.read()
+        return jsonify(raw)
+    else:
+        with open(file_path, "wb") as info:
+            # json.dump(raw, datafile)
             raw = request.data
             info.write(raw)
         return raw

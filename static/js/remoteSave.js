@@ -1,15 +1,20 @@
 class FlaskStorageManager{
 
     constructor(model) {
+        this.model = model
         let self = this
         model.subscribe(function(slist, msg) {
-            self.saveFlask(slist)
+            self.saveFlask(slist, auto=true)
         })
+        this.loadFlask(auto=true)
     }
 
-    saveFlask(slist) {
+    saveFlask(slist, auto=false) {
         let ls_list = JSON.stringify({newItems:slist.newItems})
         let post_string="/shoppinglist"
+        if (auto==true){
+            post_string=post_string+"auto"
+        }
 
         let config={}
         config.method='POST'
@@ -19,7 +24,7 @@ class FlaskStorageManager{
         fetch(post_string,config)
     }
 
-    loadFlask(){
+    loadFlask(auto=false){
         let model=this.model
         this.model.removeAll()
 
@@ -28,7 +33,9 @@ class FlaskStorageManager{
         config.header={'Content-Type':'application/json','Accept':'application/json'}
 
         get_string="/shoppinglist"
-
+        if (auto==true){
+            get_string=post_string+"auto"
+        }
         let fromFlask=fetch(get_string, config)
             .then(function (response) { return response.json() })
             .catch(error => console.error("error: ", error))
